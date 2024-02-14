@@ -38,6 +38,38 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
 
   <!-- Scripts -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ["\\[", "\\]"]], // Display math delimiter
+      },
+      startup: {
+        ready() {
+          MathJax.startup.defaultReady();
+          MathJax.startup.promise.then(() => {
+            // Apply custom scaling or classes to math elements
+            document.querySelectorAll('mjx-container[display="true"]').forEach(el => {
+              el.style.fontSize = '90%'; // Larger for display math
+            });
+            document.querySelectorAll('mjx-container[display="inline"]').forEach(el => {
+              el.style.fontSize = '100%'; // Default size for inline math
+            });
+          });
+        }
+      }
+    };
+  </script>
+  <style>
+    mjx-container[jax="SVG"][display="true"] {
+      font-size: 1%; /* Default size for display math */
+    }
+    mjx-container[jax="SVG"][display="inline"] {
+      font-size: 10%; /* Smaller size for inline math */
+    }
+  </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" defer></script>
   <script src="{{- 'assets/js/jquery.scrolly.min.js' | relative_url -}}" defer></script>
   <script src="{{- 'assets/js/jquery.scrollzer.min.js' | relative_url -}}" defer></script>
@@ -45,5 +77,57 @@
   <script src="{{- 'assets/js/util.js' | relative_url -}}" defer></script>
   <!--[if lte IE 8]><script src="{{- 'assets/js/ie/respond.min.js' | relative_url -}}" defer></script><![endif]-->
   <script src="{{- 'assets/js/main.js' | relative_url -}}" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.citation').forEach(function(citation) {
+            var refId = citation.getAttribute('ref'); // Adjusted to data-ref
+            var referencedElement = document.getElementById(refId);
+            
+            if (referencedElement) {
+                var shorthand = referencedElement.getAttribute('shorthand');
+                citation.textContent = '[' + shorthand + ']'; // Fill the citation text
+                citation.style.cursor = 'pointer'; // Make it appear clickable
+                citation.title = "Go to reference"; // Optional: Add a tooltip
 
+                citation.addEventListener('click', function() {
+                    referencedElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Add the 'highlight' class to the referenced element
+                    referencedElement.classList.add('highlight');
+
+                    // Remove the 'highlight' class after 2 seconds
+                    setTimeout(function() {
+                        referencedElement.classList.remove('highlight');
+                    }, 2000); // Adjust the time as needed
+                });
+            }
+        });
+    });
+    </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Listen for clicks on all elements with the class 'cite-equation'
+        document.querySelectorAll('.cite-equation').forEach(function(cite) {
+            cite.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default anchor behavior
+
+                // The 'href' attribute of the clicked element, removing the '#' to get the ID
+                var refId = this.getAttribute('href').substring(1);
+                var referencedElement = document.getElementById(refId);
+
+                // If the referenced element exists, scroll to it smoothly
+                if (referencedElement) {
+                    referencedElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Add the 'highlight' class to the referenced element
+                    referencedElement.classList.add('highlight');
+
+                    // Remove the 'highlight' class after 2 seconds
+                    setTimeout(function() {
+                        referencedElement.classList.remove('highlight');
+                    }, 2000); // Adjust the time as needed
+                }
+            });
+        });
+    });
+  </script>
 </head>

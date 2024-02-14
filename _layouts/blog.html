@@ -1,15 +1,30 @@
 ---
 layout: default
+image: /path/to/banner-image.jpg 
 ---
 {%- assign _posts = site.posts | sort: 'date' | reverse -%}
 {%- include header.html scrolly_nav=_posts -%}
 <!-- Main -->
 <div id="main">
+    {%- if page.image -%} <!-- Check if the image variable exists -->
+        <div class="banner-image"> <!-- Container for the banner image -->
+            <img src="{{ page.image }}" alt="{{ page.title | escape }}"> <!-- Display the image -->
+        </div>
+    {%- endif -%}
 	{%- if page.content != "" -%}
 		{%- include section.html title=page.title photo=page.cover-photo photo-alt=page.cover-photo-alt auto-header=page.auto-header content=page.content -%}
 	{%- endif -%}
+
 	<!-- Posts List -->
 	{%- for _post in _posts -%}
+		{%- if _post.image -%} <!-- Check if the image variable exists -->
+			<div class="banner-image"> <!-- Container for the banner image -->
+				<img src="{{ _post.image }}" alt="{{ _post.title | escape }}"> <!-- Display the image -->
+			</div>
+		{%- endif -%}
+        {%- if _post.location -%}
+            <div class="location-text">{{ _post.location }}</div>
+        {%- endif -%}
 		{%- capture _title -%}
 			<a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a>
 		{%- endcapture -%}

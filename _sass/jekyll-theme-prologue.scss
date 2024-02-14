@@ -73,6 +73,7 @@
 		}
 	}
 
+
 	input, textarea, select {
 		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 19pt;
@@ -203,7 +204,264 @@
 	br.clear {
 		clear: both;
 	}
+	@keyframes highlightFadeIn {
+		from {
+			background-color: transparent;
+		}
+		to {
+			background-color: lightblue; /* Or any highlight color */
+		}
+	}
+	
+	@keyframes highlightFadeOut {
+		from {
+			background-color: lightblue; /* Or any highlight color */
+		}
+		to {
+			background-color: transparent;
+		}
+	}
+	
+	.highlight {
+		animation: highlightFadeIn 0.5s forwards, highlightFadeOut 0.5s 1s forwards;
+	}
+/* Equation cite */
+	.equation {
+		display: flex;
+		justify-content: center; /* Center the equation */
+		position: relative; /* For positioning citation */
+		margin-top: -3%;
+		top:0
+	}
 
+	.equation::after {
+		content: "(" attr(id) ")"; /* Enclose id in brackets */
+		position: absolute;
+		top: 25%;
+		right: 10pt;
+		font-style: normal;
+	}
+
+	.cite-equation {
+		color: #007bff; /* Bootstrap link color for consistency */
+		text-decoration: underline; /* Make it obvious it's clickable */
+	}
+
+/* Reference text */
+	.references-text {
+		background-color: #f8f8f8; /* Slightly different background for distinction */
+		font-family: 'Times New Roman', Times, serif; /* Maintain font consistency */
+		padding: 15px; /* Slightly more padding for emphasis */
+		margin-top: 20px; /* More space before the element to separate from main content */
+		margin-bottom: 20px; /* More space after the element for clear separation */
+		border-left: 5px solid #007bff; /* Add a colored border for emphasis */
+		font-size: 0.95em; /* Slightly smaller font size for references */
+		line-height: 1.6; /* Improved line spacing for readability */
+		color: #333; /* Slightly darker text for contrast */
+	}
+
+	.reference {
+		display: block;
+		font-family: 'Times New Roman', Times, serif;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		position: relative; /* Establish positioning context */
+		padding-left: 80px; /* Reserve space for the publisher to prevent overlap */
+	}
+	
+	.reference::before {
+		content: '[' attr(shorthand) '] ';
+		margin-right: 20px;
+		position: absolute;
+		left: 0; /* Position at the start of the div */
+	}
+	
+	.reference::after {
+		content: " - " attr(publisher);
+		font-style: italic;
+	}
+
+	.citation {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+/* Math text */
+
+.math-text {
+	background-color: white; /* Light gray background */
+	font-family: 'Times New Roman', Times, serif; /* Similar to IEEE font */
+	padding: 10px; /* Add some padding */
+	margin-top: 10px; /* Add space before the element */
+	margin-bottom: 10px; /* Add space after the element */
+  }
+  .math-text input, 
+  .math-text textarea, 
+  .math-text select {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 19pt;
+	font-weight: 300;
+	line-height: 1.75em;
+	color: #888;
+  }
+  
+  .math-text h1, 
+  .math-text h2, 
+  .math-text h3, 
+  .math-text h4, 
+  .math-text h5, 
+  .math-text h6 {
+	font-weight: 300;
+	color: #666;
+	line-height: 1.5em;
+	padding-bottom: 10pt;
+	padding-top: 10pt;
+  }
+  
+  .math-text h4 {
+	font-size: 25pt;
+    text-indent: -14pt !important; 
+  }
+
+  .math-text large {
+	font-size: 20pt;
+   }
+
+
+  .math-text h1 a, 
+  .math-text h2 a, 
+  .math-text h3 a, 
+  .math-text h4 a, 
+  .math-text h5 a, 
+  .math-text h6 a {
+	color: inherit;
+	text-decoration: none;
+  }
+  
+  .math-text strong {
+	color: #666;
+  }
+
+  .math-text h1, .math-text h2, .math-text h3, .math-text h4, .math-text h5 {
+	display: flex;
+	align-items: flex-start;
+  }
+  
+  .math-text h1::before, .math-text h2::before, .math-text h3::before, 
+  .math-text h4::before, .math-text h5::before {
+	content: attr(number); /* Use the data-number attribute's value */
+	margin-right: 20px; /* Adjust the space between the number and the text */
+	flex: 0 0 auto; /* Prevent the number column from growing */
+  }
+
+  .math-text h3 {
+	font-size: 1.5em;
+  }
+  
+  .math-text header {
+	margin: 0 0 2em 0;
+  }
+  
+  .math-text header > p {
+	margin: 1em 0 0 0;
+  }
+  
+  .math-text footer {
+	margin: 2em 0 0 0;
+  }
+  
+  .math-text strong, 
+  .math-text b {
+	font-weight: 640;
+	color:  #666;
+  }
+  
+  .math-text em, 
+  .math-text i {
+	font-style: italic;
+  }
+  
+  .math-text a {
+	text-decoration: none;
+	color: inherit;
+	border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
+	transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+	outline: 0;
+  }
+  
+  .math-text a:hover {
+	color: #E27689;
+	border-bottom-color: rgba(255, 255, 255, 0);
+  }
+  
+  .math-text sub {
+	position: relative;
+	top: 0.5em;
+	font-size: 0.8em;
+  }
+  
+  .math-text sup {
+	position: relative;
+	top: -0.5em;
+	font-size: 0.8em;
+  }
+  
+  .math-text hr {
+	border: 0;
+	border-top: solid 1px #41484c;
+  }
+
+  
+ .math-text code {
+	background: rgba(0, 0, 0, 0.05);
+	border-color: rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	font-family: "Courier New", monospace;
+	font-size: 0.9em;
+	padding: 0.25em 0.325em;
+  }
+  
+  .math-text pre {
+	-webkit-overflow-scrolling: touch;
+	font-family: "Courier New", monospace;
+	font-size: 0.9em;
+	tab-size: 4;
+	margin: 0 0 2em 0;
+  }
+  
+  .math-text pre code {
+	display: block;
+	line-height: 1.5;
+	padding: 0.75em 1em;
+	overflow-x: auto;
+  }
+  
+  .math-text blockquote {
+	margin-left: 1em;
+	border-left: solid 0.5em #ddd;
+	padding: 1em 0 1em 2em;
+	font-style: italic;
+  }
+  
+  .math-text p, 
+  .math-text ul, 
+  .math-text ol, 
+  .math-text dl, 
+  .math-text table {
+	margin-bottom: 2em;
+  }
+  
+  .math-text dl dt {
+	font-weight: 300;
+	color: #666;
+  }
+  
+  .math-text dl dd {
+	margin-left: 1em;
+  }
+  
+  .math-text br.clear {
+	clear: both;
+  }
 /* Sections/Article */
 
 	section, article {
@@ -234,7 +492,40 @@
 		}
 	}
 
+
 /* Image */
+	.banner-image {
+		position: relative;
+		width: 100%; /* Make the image fill the container's width */
+		height: 300px; /* Predefined height for the image */
+		object-fit: cover; /* Cover the container without losing the aspect ratio */
+		display: block; /* Remove any inline spacing */
+	}
+
+	.banner-image img {
+		width: 100%;
+		height: auto; /* Adjust height as necessary, could be 100% if you have a fixed height for the container */
+		height: 300px; /* Predefined height for the image */
+		object-fit: cover;
+		display: block;
+	}
+
+	.location-text {
+		position: absolute;
+		// top: 50%; /* Center vertically */
+		left: 50%; /* Center horizontally */
+		transform: translate(-120px, -270px); /* Adjust position to truly center based on the element's size */
+		color: #000000; /* Text color */
+		font-size: 50px; /* Adjust as necessary */
+		font-weight: bold; /* Adjust as necessary */
+		text-align: left;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 380; /* This specifies the light weight */
+		line-height: 1.3;
+		// background-color: rgba(0, 0, 0, 0.5); /* Optional: adds a semi-transparent background */
+		// padding: 5px 10px; /* Adjust as necessary */
+		// border-radius: 5px; /* Optional: for rounded corners */
+	}
 
 	.image {
 		display: inline-block;
@@ -782,6 +1073,18 @@
 
 			body, input, textarea, select {
 				font-size: 16pt;
+			}
+
+			// body .MathJax {
+			// 	font-size: 0.5em !important;
+			// }
+
+			body .MathJax_CHTML {
+				font-size: 0.0001em !important; // Adjust based on your preference
+			}
+
+			body .MathJax_Display {
+				font-size: 0.0001em !important; // Adjust based on your preference
 			}
 
 			.container {

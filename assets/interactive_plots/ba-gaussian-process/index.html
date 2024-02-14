@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="no-js">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.3/math.min.js"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <link href="css/base-style/style.css" rel="stylesheet" />
+  <link href="css/GP.css" rel="stylesheet">
+  </link>
+  <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          },
+        });
+      </script>
+  <script type="text/javascript" charset="utf-8"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </script>
+  <script type="text/javascript" charset="utf-8" src="https://vincenttam.github.io/javascripts/MathJaxLocal.js">
+  </script>
+</head>
+
+<body>
+  <div class="plots-container">
+    <div id="plot-container" style="height: 400pt;">
+      <div class="header">
+      <b>Interactive SE Kernel</b>
+      </div>
+        <div id="plot" ></div> <!-- Your first plot goes here -->
+    </div>
+    <div id="chart-container">
+      <div class="header">
+      <b>Interactive Gaussian Process</b>
+      <div style="margin-top: 20%;"></div>
+      </div>
+
+        <canvas id="myChart" style="height: 250pt;"></canvas> <!-- Your second plot goes here -->
+        <div class="center-text button-container">
+        <button onclick="resetObservations()" class="btn-sm reset-button">
+          Reset Chart
+        </button>
+      </div>
+      </div>
+
+</div>
+
+
+  <div class="slider-container">
+    <label for="sigma-slider">Sigma (σ): 1.0</label>
+    <input type="range" id="sigma-slider" min="0.0" max="10.0" step="0.01" value="1.0">
+  </div>
+  <div class="slider-container">
+      <label for="length-scale-slider">Length Scale (l): 1.0</label>
+      <input type="range" id="length-scale-slider" min="0.0" max="10.0" step="0.01" value="1.0">
+  </div>
+  <script src="js/GP.js"></script>
+</body>
+
+</html>

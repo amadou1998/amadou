@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Plot with Sliders</title>
+    <style>
+        .slider-container {
+            width: 600px;
+            margin-bottom: 20px;
+            font-size: 14pt;
+            font-family: 'Times New Roman', Times, serif; /* Similar to IEEE font */
+            color: black; /* Set font color */
+        }
+    
+        .slider-container input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+    
+        .slider-container input[type="range"]:hover {
+            opacity: 1;
+        }
+    
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+        }
+    
+        .slider-container input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #007bff;
+            cursor: pointer;
+        }
+    
+        .slider-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    
+        .slider-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    </style>   
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+    <div id="plot" style="width: 700px; height: 700px;"></div>
+    <div class="slider-container">
+        <label for="sigma-slider">Sigma (σ): 1.0</label>
+        <input type="range" id="sigma-slider" min="0.0" max="10.0" step="0.01" value="1.0">
+    </div>
+    <div class="slider-container">
+        <label for="length-scale-slider">Length Scale (l): 1.0</label>
+        <input type="range" id="length-scale-slider" min="0.0" max="10.0" step="0.01" value="1.0">
+    </div>
+    <script>
+        let plotInitialized = false;
+
+        function updatePlot() {
+            // Example of how you might compute the squared exponential kernel data
+            // This is a placeholder function - you'll need to replace it with actual computations
+            function computeKernelData(sigma, lengthScale, xRange, yRange) {
+                let z = [];
+                let x = [];
+                let y = [];
+
+                // Generate x and y values based on xRange and yRange
+                for (let i = xRange[0]; i <= xRange[1]; i += 0.1) {
+                    x.push(i);
+                }
+                for (let i = yRange[0]; i <= yRange[1]; i += 0.1) {
+                    y.push(i);
+                }
+
+                // Compute z values based on the squared exponential kernel
+                for (let i = 0; i < y.length; i++) {
+                    let zRow = [];
+                    for (let j = 0; j < x.length; j++) {
+                        let value = sigma * sigma * Math.exp(-Math.pow(x[j] - y[i], 2) / (2 * lengthScale * lengthScale));
+                        zRow.push(value);
+                    }
+                    z.push(zRow);
+                }
+
+                return {x, y, z, type: 'surface'};
+            }
+
+            var Data = computeKernelData(document.getElementById('sigma-slider').value, document.getElementById('length-scale-slider').value, [0, 10], [0, 10]);
+
+            if (!plotInitialized) {
+                // Initial plot setup
+                let initialData = {
+                    z: Data.z,
+                    type: 'surface',
+                    contours: {
+                        z: {
+                            show:true,
+                            usecolormap: true,
+                            highlightcolor:"#42f462",
+                            project:{z: true}
+                        }
+                    }
+                };
+                let layout = {
+                    title: 'Squared Exponential Kernel',
+                    autosize: true,
+                    scene: {
+                        xaxis: {title: 'x'}, // Use double backslashes to escape
+                        yaxis: {title: 'x\''}, // LaTeX for x prime
+                        zaxis: {title: 'k(x, x′)'} // LaTeX for the kernel function
+                    },
+                    font: {
+                        color: 'black',
+                        size: 14,
+                        family: 'Times New Roman'
+                    }
+                };
+                Plotly.newPlot('plot', [initialData], layout);
+                plotInitialized = true;
+            } else {
+                // Update existing plot
+                Plotly.restyle('plot', 'z', [Data.z]);
+            }
+        }
+
+        // Initial plot
+        updatePlot();
+
+        // Event listeners for sliders
+        document.getElementById('sigma-slider').addEventListener('input', updatePlot);
+        document.getElementById('length-scale-slider').addEventListener('input', updatePlot);
+        document.getElementById('sigma-slider').addEventListener('input', function() {
+        // Retrieve the current value of the sigma slider
+        let sigmaValue = this.value;
+        // Update the label directly with the current value
+        document.querySelector('label[for="sigma-slider"]').textContent = `Sigma (σ): ${sigmaValue}`;
+    });
+
+    document.getElementById('length-scale-slider').addEventListener('input', function() {
+        // Retrieve the current value of the length scale slider
+        let lengthScaleValue = this.value;
+        // Update the label directly with the current value
+        document.querySelector('label[for="length-scale-slider"]').textContent = `Length Scale (l): ${lengthScaleValue}`;
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+canvas{
+  margin-top: 0px;
+  margin: 0 auto; 
+}
+
+.center-text {
+  text-align: center;
+  font-size: 16pt;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.slider-container {
+  width: 600px;
+  margin: 0 auto; 
+  margin-bottom: 20px;
+  font-size: 14pt;
+  font-family: 'Times New Roman', Times, serif; /* Similar to IEEE font */
+  color: black; /* Set font color */
+}
+
+.slider-container input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider-container input[type="range"]:hover {
+  opacity: 1;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007bff;
+  cursor: pointer;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #007bff;
+  cursor: pointer;
+}
+
+.slider-container label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.slider-value {
+  display: inline-block;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.button-container{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button.gp-button{
+  border-radius: 5px;
+  border: None;
+  
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 0.83em;
+}
+
+button.reset-button{
+  background-color: #b4b4b9;
+  border-radius: 5px;
+  border: None;
+  color: inherit;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 12pt;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+button:hover{
+  color: #333333;
+  -webkit-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+.box {
+  position: relative;
+  width: 90%;
+  float: left;
+  font-size: 12px;
+  margin: 0 5% 15px 5%;
+}
+
+.box:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  /* initial ratio of 1:1*/
+}
+
+.ratio2_1:before {
+  padding-top: 50%;
+}
+
+.ratio1_2:before {
+  padding-top: 200%;
+}
+
+.ratio4_3:before {
+  padding-top: 75%;
+}
+
+.ratio16_9:before {
+  padding-top: 56.25%;
+}
+
+.box-content {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  /* Styling */
+  padding: 0px;
+  text-align: center;
+  vertical-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.grey-border{
+  border: solid rgb(220, 220, 220);
+  border-width: 1px 1px 1px 1px;
+}
+
+.center-align{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.max-width{
+  max-width: 500px;
+}
+
+.center-text{
+  text-align: center;
+}
+
+.plots-container {
+  display: flex; /* Use Flexbox to align children side by side */
+  justify-content: space-around;
+  width: 100%; /* Ensure the container takes the full width of the screen */
+  row-gap: 30pt;
+  align-items: stretch; /* Center the plot/chart horizontally */
+}
+
+#plot-container, #chart-container {
+  flex: 1 1 0px; /* flex-grow, flex-shrink, flex-basis - occupies 40% of the container's width */
+  flex-direction: column; /* Aligns children (the plot or chart) vertically */
+  justify-content: center; /* Center the plot/chart vertically, if needed */
+  align-items: center; /* Center the plot/chart horizontally */
+}
+
+#plot, #myChart {
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  width: 100%;
+  padding-top: 0;
+  margin-top: 0; 
+  font-size: 14pt;
+  font-family: 'Times New Roman', Times, serif;
+}
