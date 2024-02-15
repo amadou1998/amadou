@@ -53,7 +53,7 @@ function makeGPChart(ctx) {
           linewidth: 3,
         },
         {
-          label: "Uncertainity",
+          label: "Uncertainity (68%)",
           data: [],
           pointStyle: "None",
           radius: 0,

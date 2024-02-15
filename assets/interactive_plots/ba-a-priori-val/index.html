@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plotly Sample</title>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="css/GP.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">'Gaussian Process with 95% Confidence Interval'</div>
+    <div id="myDiv", style="width: 100%;">
+    </div>
+
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-icon line"></div>
+            <div class="legend-text">Mean</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-icon line-dotted"></div>
+            <div class="legend-text">\(M_{supp}\)</div>
+        </div>
+        <div class="legend-item">
+            <div class="legend-icon square"></div>
+            <div class="legend-text">Uncertainty (95%)</div>
+        </div>
+    </div>
+    <div class="center-text button-container">
+        <button id="addSamplesBtn" class="btn-sm gp-button">Add Samples</button>
+        <button id="resetBtn" class="btn-sm reset-button">Reset</button>
+    </div>
+    <div id="sample-count">Functions Sampled: 0</div>
+    <div id="supremum-violation">Supremum violation: 0</div>
+    <div id="supremum-violation">Lipschitz constant violation: 0</div>
+
+    <script src="js/plotly.js"></script>
+</body>
+</html>

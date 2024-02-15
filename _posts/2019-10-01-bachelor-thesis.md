@@ -292,7 +292,7 @@ The following plot depicts the resulting surface for the lower bound of $l$ in d
 
 Considering the case-by-case solution, as well as the bounds defined by <a href="#3.18" class="cite-equation">Equations 3.13</a>, the behavior of $l$ can be interpreted. For small values of $L_{max}$, that is a tightly bounded rate of change in the unknwon function, the length scale increases sharply, apporach infinity for $L_{max}$ approaching zero. This behaviour is expected as an increased length scale results in extremely smooth sample functions, with minimal rates of change.  
 
-The relationship with $M_{supp}$ is more complicated. An increase in $M_{supp}$ translates into an increased floor for $l$. Given that the extent of the bounded region increases with $M_{supp}$, one would expect that the length scales decreases, allowing for a larger rate of change and therefore increased fluctuations in the unknwon function, however an increase in $M_{supp}$ also results in an increase in the upper bound of $\sigma$ (<a href="#3.13" class="cite-equation">Equations 3.8</a>). This increase in $\sigma$ alows for a larger variation of the unknwon function in general, necessitating the decrease in the length scale. 
+The relationship with $M_{supp}$ is more complicated. An increase in $M_{supp}$ translates into an increased floor for $l$. Given that the extent of the bounded region increases with $M_{supp}$, one would expect that the length scales decreases, allowing for a larger rate of change and therefore increased fluctuations in the unknwon function, however an increase in $M_{supp}$ also results in an increase in the upper bound of $\sigma$ (<a href="#3.13" class="cite-equation">Equations 3.13</a>). This increase in $\sigma$ alows for a larger variation of the unknwon function in general, necessitating the decrease in the length scale. 
 
 In areas where $M_{\text{supp}}$ is small and $L_{\text{max}}$ is large, there is no absolute minimum value set for the length scale. In these cases, the length scale is constrained based on its relationship with the chosen standard deviation. This scenario suggests that the constricted bound represented by $M_{\text{supp}}$ prescribes the permissible fluctuations before any violation occurs, depending on the potential variability of the unknown function. Lower variability allows for more significant fluctuation and vice versa. The interpretation is supported by the findings in <a href="#3.16" class="cite-equation">Equations 3.16</a>.
 
@@ -303,6 +303,10 @@ In areas where $M_{\text{supp}}$ is small and $L_{\text{max}}$ is large, there i
 
 <h2 number="4."> Evaluting the Hyperparmeter Bounds</h2>
 
+
+<div style="width=100%">
+  <iframe src="{{ 'assets/interactive_plots/ba-a-priori-val/index.html' | relative_url }}"  width="100%" height="700" frameborder="0"></iframe>
+</div>
 
 </div>
 
