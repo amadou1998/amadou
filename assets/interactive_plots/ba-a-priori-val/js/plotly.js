@@ -16,11 +16,28 @@ var tracesAdded = 0;
 
 async function initializePlot() {
     // Initialize data
-    var X_new = await fetchData("data/X_new.json");
-    var y_mean = await fetchData("data/y_mean.json");
-    var y_lower = await fetchData("data/y_lower.json");
-    var y_upper = await fetchData("data/y_upper.json");
-    var y_samples = await fetchData("data/y_samples.json");
+    const urlParams = new URLSearchParams(window.location.search);
+    const L_f = urlParams.get('L_f');
+    const f_bar = urlParams.get('f_bar');
+    // Select the div Element
+    const divHeader = document.querySelector('.header');
+
+    // Modify the div Content
+    if (divHeader && L_f !== null && f_bar !== null) {
+        divHeader.innerHTML = `Gaussian Process with \\(L_{max} = ${L_f}\\) and \\(M_{supp} = ${f_bar}\\)`;
+    }
+    var X_new = await fetchData(`data/L_f${L_f}f_bar${f_bar}/X_new.json`);
+    var y_mean = await fetchData(`data/L_f${L_f}f_bar${f_bar}/y_mean.json`);
+    var y_lower = await fetchData(`data/L_f${L_f}f_bar${f_bar}/y_lower.json`);
+    var y_upper = await fetchData(`data/L_f${L_f}f_bar${f_bar}/y_upper.json`);
+    var y_samples = await fetchData(`data/L_f${L_f}f_bar${f_bar}/y_samples.json`);
+    var slope_violation_proba = await fetchData(`data/L_f${L_f}f_bar${f_bar}/slope_violation_proba.json`);
+    var max_lipschitz = await fetchData(`data/L_f${L_f}f_bar${f_bar}/max_lipschitz.json`);
+    var max_deviation = await fetchData(`data/L_f${L_f}f_bar${f_bar}/max_deviation.json`);
+    var bound_violation_proba = await fetchData(`data/L_f${L_f}f_bar${f_bar}/bound_violation_proba.json`);
+
+
+
 
     // Create initial plot
     var trace1 = {
@@ -58,12 +75,16 @@ async function initializePlot() {
 
     var layout = {
         showlegend: false,
+        dragmode: false,
         hovermode: false,
+        autosize: true,
         xaxis: {
-            title: 'x'
+            title: 'x',
+            fixedrange: true
         },
         yaxis: {
-            title: 'f(.)'
+            title: 'f(.)',
+            fixedrange: true
         },
         shapes: [
             // Line at y = 1
@@ -72,8 +93,8 @@ async function initializePlot() {
                 x0: 0,
                 x1: 1,
                 xref: 'paper', // 'paper' refers to the entire range of the x-axis
-                y0: 1,
-                y1: 1,
+                y0: f_bar,
+                y1: f_bar,
                 yref: 'y',
                 line: {
                     color: 'red',
@@ -87,8 +108,8 @@ async function initializePlot() {
                 x0: 0,
                 x1: 1,
                 xref: 'paper', // 'paper' refers to the entire range of the x-axis
-                y0: -1,
-                y1: -1,
+                y0: -f_bar,
+                y1: -f_bar,
                 yref: 'y',
                 line: {
                     color: 'red',
@@ -99,7 +120,7 @@ async function initializePlot() {
         ]
     };
 
-    Plotly.newPlot('myDiv', [trace1, trace2, trace3], layout, {displayModeBar: false});
+    Plotly.newPlot('myDiv', [trace1, trace2, trace3], layout, {displayModeBar: false, responsive: true});
     // Function to add samples
     function addSamples() {
         totalSamples = totalSamples === 0 ? 8 : Math.min(totalSamples * 2, y_samples.length);
@@ -127,6 +148,12 @@ async function initializePlot() {
         tracesAdded = totalSamples;
         // Update the title to reflect the number of samples
         Plotly.relayout('myDiv');
+        // Update content using JavaScript
+        document.getElementById("sample-count").textContent = "Functions Sampled: " + totalSamples;
+        document.getElementById("supremum-violation").textContent = "Supremum violation: " + bound_violation_proba[totalSamples-1].toFixed(2);
+        document.getElementById("lipschitz-violation").textContent = "Lipschitz constant violation: " + slope_violation_proba[totalSamples-1].toFixed(2);
+        document.getElementById("max-absolute").textContent = "Maximum absolute value: " + max_deviation[totalSamples-1].toFixed(2);
+        document.getElementById("max-lipschitz").textContent = "Maximum Lipschitz constant: " + max_lipschitz[totalSamples-1].toFixed(2);
     }
 
     // Function to reset the plot

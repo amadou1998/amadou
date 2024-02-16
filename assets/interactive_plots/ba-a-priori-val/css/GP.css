@@ -183,8 +183,9 @@ button:hover{
   width: 100%;
   padding-top: 0;
   margin-top: 0; 
-  font-size: 14pt;
+  font-size: 16pt;
   font-family: 'Times New Roman', Times, serif;
+  color: #888;
 }
 
 .legend {
@@ -225,4 +226,19 @@ button:hover{
 }
 .legend-text {
   font-size: 16px;
+}
+.sample-stats {
+  flex: 1; 
+  font-size: 12pt;
+  font-family: 'Times New Roman', Times, serif;
+  padding-left: 10pt;
+  color: #888;
+}
+
+.sample-stat-container {
+  padding-left: 20pt;
+  display: flex; /* corrected display value */
+  flex-wrap: wrap; /* added flex-wrap property */
+  align-items: stretch; /* corrected align-items value */
+  justify-content: stretch;
 }

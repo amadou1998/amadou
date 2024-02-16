@@ -40,7 +40,9 @@ email: amadou.6e@googlemail.com
 avatar: assets/images/avatar.jpg
 
 # You'll want to customize url and baseurl for your own site:
+# baseurl: "/jekyll-theme-prologue" # the subpath of your site, e.g. /blog
 baseurl: "/amadou" # the subpath of your site, e.g. /blog
+# url: "" # the base hostname & protocol for your site
 url: "https://amadou1998.github.io/" # the base hostname & protocol for your site
 
 # Social settings
@@ -60,6 +62,6 @@ dribbble_url:
 google_analytics:
 
 # The following settings are NECESSARY for the Prologue theme to run:
-# theme: jekyll-theme-prologue
+theme: jekyll-theme-prologue
 remote_theme: chrisbobbe/jekyll-theme-prologue
-collections: [sections]
+# collections: [sections]

@@ -286,8 +286,8 @@ $$
 where $$\underline{l}_1$$ is defined in <a href="#3.10" class="cite-equation">Equations 3.10</a> and $$\underline{l}_2$$ is the square of the solution $$I_2$$ to <a href="#3.13" class="cite-equation">Equations 3.13</a>.
 The following plot depicts the resulting surface for the lower bound of $l$ in depending on $L_{max}$ and $M_{supp}$. The slider adjusts the supremum of the variance on the set $\mathbb{X}$, r. 
 
-<div style="width=100%">
-  <iframe src="{{ 'assets/interactive_plots/ba-hyperparameter.html' | relative_url }}"  width="900" height="600" frameborder="0"></iframe>
+<div style="width=100%; text-align: center; height=620pt">
+  <iframe src="{{ 'assets/interactive_plots/ba-hyperparameter.html' | relative_url }}"  width="100%" height="620pt" frameborder="0"></iframe>
 </div>
 
 Considering the case-by-case solution, as well as the bounds defined by <a href="#3.18" class="cite-equation">Equations 3.13</a>, the behavior of $l$ can be interpreted. For small values of $L_{max}$, that is a tightly bounded rate of change in the unknwon function, the length scale increases sharply, apporach infinity for $L_{max}$ approaching zero. This behaviour is expected as an increased length scale results in extremely smooth sample functions, with minimal rates of change.  
@@ -303,13 +303,36 @@ In areas where $M_{\text{supp}}$ is small and $L_{\text{max}}$ is large, there i
 
 <h2 number="4."> Evaluting the Hyperparmeter Bounds</h2>
 
+The effect of the bounds can be determined empirically. The following interactive plots give the reader an intuition for the effect of the bounds on the unknown function of GPs, with a combination of $L_{max}$ of either 1 or 100 and $M_{supp}$ of either 1 or 100. The variance of $x$ on $\mathbb{X}$ is $r=1$ and $\delta_L=0.1$. The constant $C$ is chosen as $1$, which reduces the strictness of the bounds by a factor of 12. However, it can be observed that the bounds remain excessively strict, given $\delta_L=0.1$. 
 
-<div style="width=100%">
-  <iframe src="{{ 'assets/interactive_plots/ba-a-priori-val/index.html' | relative_url }}"  width="100%" height="700" frameborder="0"></iframe>
+<div style="display: flex; width: 100%;">
+  <div style="flex: 1;">
+    <iframe src="{{ 'assets/interactive_plots/ba-a-priori-val/index.html' | relative_url }}?L_f=100&f_bar=100" width="100%" height="700" frameborder="0"></iframe>
+  </div>
+  <div style="flex: 1;">
+    <iframe src="{{ 'assets/interactive_plots/ba-a-priori-val/index.html' | relative_url }}?L_f=100&f_bar=1" width="100%" height="700" frameborder="0"></iframe>
+  </div>
+</div>
+---
+<div style="display: flex; width: 100%;">
+<div style="flex: 1;">
+  <iframe src="{{ 'assets/interactive_plots/ba-a-priori-val/index.html' | relative_url }}?L_f=1&f_bar=100"  width="100%" height="700" frameborder="0"></iframe>
+</div>
+<div style="flex: 1">
+  <iframe src="{{ 'assets/interactive_plots/ba-a-priori-val/index.html' | relative_url }}?L_f=1&f_bar=1"  width="100%" height="700" frameborder="0"></iframe>
+</div>
 </div>
 
-</div>
 
+</div>
+<div style="margin-top: 30px;"></div>
+<div class="math-text" markdown="1">
+<h2 number="5."> Conclusion and Future Work</h2>
+
+For further evaluation, the results can now be applied to a real-world system, to provide empirical results
+for the application of the bound to a control problem. Most systems of relevance, necessitate the GP to perform over an input vector, calling for the extension of the bound to the case of $d>1$.
+
+</div>
 
 
 <div style="margin-top: 30px;"></div>
