@@ -25,6 +25,8 @@ async function initializePlot() {
     // Modify the div Content
     if (divHeader && L_f !== null && f_bar !== null) {
         divHeader.innerHTML = `Gaussian Process with \\(L_{max} = ${L_f}\\) and \\(M_{supp} = ${f_bar}\\)`;
+    } else {
+        console.log("parameter is null")
     }
     var X_new = await fetchData(`data/L_f${L_f}f_bar${f_bar}/X_new.json`);
     var y_mean = await fetchData(`data/L_f${L_f}f_bar${f_bar}/y_mean.json`);
